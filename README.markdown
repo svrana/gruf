@@ -1,30 +1,31 @@
-# Gruf 
+Gruf 
+====
 
 A collection of scripts to help productivity when dealing with
 Projects.  Probably only applicable to those of us working from the
 command line and without an IDE.
 
-
 Example Usage:
----
+--------------
 
 Suppose you're working on some code in directory
 /work/company/project/moriarity/rls5/bug100.
 
-# Change project to 'bug100'
+<i>Change project to 'bug100'</i>
 chp bug100
 
-# open file ReservationsTab.java that is somewhere in the bug100 directory
+<i>open file ReservationsTab.java that is somewhere in the bug100
+directory</i>
 pvi ReservationsTab.java 
 
-# goto /work/company/project/moriarity/rls5/bug100.
+<i>goto /work/company/project/moriarity/rls5/bug100.</i>
 cdp
 
 Integration shortcuts for vim included.
 
 
 Howto
----
+-----
 
 1. Source gruf.bashrc from your .bashrc
 2. Source gruf.vimrc from your .vimrc
