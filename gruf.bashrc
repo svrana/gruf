@@ -16,8 +16,8 @@ export GRUF_PROJPATH=${HOME}/Projects
 # temporary directory for project persistance
 export GRUF_TMP=${GRUF_CONFIG}/tmp
 
-if [ ! -d ${HOME}/.tmp ]; then
-    mkdir ${HOME}/.tmp
+if [ ! -d ${GRUF_TMP} ]; then
+    mkdir ${GRUF_TMP}
 fi
 
 source $GRUF_CONFIG/grufproj.env
@@ -29,3 +29,130 @@ chp
 
 alias cdp='cd $GRUF_PROJECT'
 alias tlc='(make-list && make-tags && make-cscope) &'
+
+function pvi()
+{
+    gruf_editor_find $EDITOR $1 $GRUF_PROJECT
+}
+
+function plvi()
+{
+    gruf_editor_filelist_find $EDITOR $1 $GRUF_PROJECT .filelist
+}
+
+#
+#    gruf_editor_filelist_find(char *editor, char *fileparam, char *dir)
+#
+# @param        editor      the editor in which to load file
+# @param        fileparam   filename
+# @param        dir         directory that contains filelist to search
+#                           and which will serve as the base directory
+#                           from which to load the file contained in
+#                           filelist
+# @param        filelist    name of filelist
+#
+function gruf_editor_filelist_find()
+{
+    local editor=$1;
+    local fileparam=$2;
+    local dir=$3;
+    local filelist=$4;
+
+    if [ -z $editor ]; then
+        echo "requires editor"
+        return 1
+    elif [ -z $fileparam ]; then
+        echo "requires filename"
+        return 1
+    elif [ -z $dir ]; then
+        echo "requires starting directory"
+        return 1
+    elif [ -z $filelist ]; then
+        echo "requires filelist"
+        return 1
+    elif [ ! -f $dir/$filelist ]; then
+        echo "$dir/$filelist does not exist"
+        return 1;
+    fi
+
+    # change directory where file is located
+    cd $dir
+    #echo "running command '${cmd}'"
+
+    local filename=$(grep $fileparam $filelist | head -n1)
+
+    if [ -z "$filename" ]; then
+        echo "filename not found"
+        return 1
+    fi
+
+    $editor $filename
+
+    return 0
+}
+
+#
+#       gruf_editor_find(char *editor, char *fileparam, char *dir)
+#
+# @param        editor          the editor in which to load file specified by
+#                               fileparam
+# @param        fileparam       filename or beginning of filename for which to s
+# @param        dir             directory in which search begins
+#
+#
+function gruf_editor_find()
+{
+    local editor=$1;
+    local fileparam=$2;
+    local dir=$3;
+
+    if [ -z $editor ]; then
+	echo "requires editor"
+	return 1
+    elif [ -z $fileparam ]; then
+	echo "requires filename"
+	return 1
+    elif [ -z $dir ]; then
+	echo "requires starting directory"
+	return 1
+    fi
+
+    # change directory where file is located
+    cd $dir
+    local name_param="-name"
+
+    # check if fileparam has slashes in it.  If it does, then change 
+    # the name parameter to find accordingly.
+    if [[ ${fileparam/\//} != "${fileparam}" ]]; then
+	name_param="-samefile"
+    fi
+
+    local expr1="find -mount -type f ${name_param}"
+    local expr2="-print0 -quit"
+    local cmd="$expr1 ${fileparam} $expr2"
+    #echo "running command '$cmd'"
+
+    local filename=$($cmd)
+
+    if [ -z $filename ]; then
+	cmd="$expr1 ${fileparam}* $expr2"
+	#echo "Could not find ${fileparam}-- trying ${cmd}"
+
+	filename=$($cmd)
+	if [ -z $filename ]; then
+	    cmd="$expr1 *${fileparam}* $expr2"
+	    #echo "Could not find ${fileparam}*-- trying ${cmd}"
+	    filename=$($cmd)
+	fi
+    fi
+
+    if [ -z $filename ]; then
+	echo "filename not found"
+	return 1
+    fi
+
+    $editor $filename
+
+    return 0
+}
+
