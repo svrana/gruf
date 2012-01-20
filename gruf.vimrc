@@ -1,10 +1,11 @@
 "
 " vim configuration.
 "
-" Source this from your .vimrc
+" Source this from your .vimrc and include the $PROJECT directory
+" in your tags directory list.
 "
-" Add 'source $GRUF_CONFIG/gruf-vim.rc' to your .vimrc
-"
+" source $GRUF_CONFIG/gruf.vimrc' to your .vimrc
+" set tags=tags,$PROJECT/tags
 "
 
 function! GotoProject()
@@ -27,6 +28,8 @@ map     \gf :call GetFileFromFileList(getcwd(), '.filelist')<CR>
 map!    \gf <ESC>:call GetFileFromFileList(getcwd(), '.filelist')<CR>
 
 
+map     \pf :call GetFile(expand("$PROJECT"))<CR>
+map!    \pf <ESC>:call GetFile(expand("$PROJECT"))<CR>
 
 "
 " Prompt for a filename, attempt to find its full path by searching a
@@ -53,4 +56,26 @@ function! GetFileFromFileList(startdir, filelist)
     endif
 endfun
 
-
+"
+" Prompt for a filename, attempt to find it in the directory specified
+" by the first parameter.
+"
+" This function works decently well if your project isn't big or with an SSD.
+"
+function! GetFile(startdir)
+        let myfile=input("Filename? ")
+        if strlen(myfile) != 0
+                let cmd = 'find '  . a:startdir .  ' -mount -type f -name ' . my
+                let path = system(cmd)
+                if strlen(path) == 0
+                        " first instance gives line number of this message for s
+            " annoying reason
+                        echoerr 'File not found'
+                else
+                        exec 'edit' path
+                endif
+        else
+                " clear menubar of Filename? prompt, if only enter was pressed
+                redraw!
+        endif
+endfun

@@ -3,11 +3,17 @@
 #
 # Source this from your .bashrc
 #
-# source $GRUF_CONFIG/gruf.bashrc
+# source gruf.bashrc
 #
 
+# where these files are stored
+export GRUF_CONFIG=${HOME}/gruf
 
-export GRUF_CONFIG=${HOME}/config
+# PROJPATH operates like the CDPATH environment variable- a list of colon
+# seperated pathnames that will be searched for the specified project.
+export PROJPATH=${HOME}/Projects
+
+# temporary directory for project persistance
 export GRUF_TMP=${GRUF_CONFIG}/tmp
 
 if [ ! -d ${HOME}/.tmp ]; then
