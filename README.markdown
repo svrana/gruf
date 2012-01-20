@@ -8,25 +8,32 @@ command line and without an IDE.
 Example Usage:
 --------------
 
-Suppose you're working on some code in directory
-/work/company/project/moriarity/rls5/bug100.
+Grab a copy of this project:
 
-Change project to 'bug100'
+	git clone git://github.com/svrana/gruf.git ~/gruf
 
-	chp bug100
+Configure gruf:
+	
+	cd ~/gruf
+	source gruf.bashrc
 
-Open file ReservationsTab.java that is somewhere in the bug100 directory
+Change your project to the gruf project:
 
-	pvi ReservationsTab.java 
+	chp .
 
-Change directory to /work/company/project/moriarity/rls5/bug100.
-
+Goto your project directory:
+	
 	cdp
 
-Integration shortcuts for vim included.
+Load gruf.bashrc and set your $GRUF_PROJPATH:
+	
+	pvi bashrc
 
 
-Howto
+Follow the instructions below for vim integration.
+
+
+Installation
 -----
 
 1. Source gruf.bashrc from your .bashrc

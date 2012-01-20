@@ -1,8 +1,6 @@
 #!/usr/bin/bash
 
 #
-# Source this from your .bashrc
-#
 # source gruf.bashrc
 #
 
@@ -43,13 +41,13 @@ function plvi()
 #
 #    gruf_editor_filelist_find(char *editor, char *fileparam, char *dir)
 #
-# @param        editor      the editor in which to load file
-# @param        fileparam   filename
-# @param        dir         directory that contains filelist to search
-#                           and which will serve as the base directory
-#                           from which to load the file contained in
-#                           filelist
-# @param        filelist    name of filelist
+# @param editor      the editor in which to load file
+# @param fileparam   filename
+# @param dir         directory that contains filelist to search
+#                    and which will serve as the base directory
+#                    from which to load the file contained in
+#                    filelist
+# @param filelist    name of filelist
 #
 function gruf_editor_filelist_find()
 {
@@ -94,10 +92,10 @@ function gruf_editor_filelist_find()
 #
 #       gruf_editor_find(char *editor, char *fileparam, char *dir)
 #
-# @param        editor          the editor in which to load file specified by
-#                               fileparam
-# @param        fileparam       filename or beginning of filename for which to s
-# @param        dir             directory in which search begins
+# @param editor 	the editor in which to load file specified by
+#               	fileparam
+# @param fileparam 	filename or beginning of filename for which to s
+# @param dir 		directory in which search begins
 #
 #
 function gruf_editor_find()
@@ -132,6 +130,8 @@ function gruf_editor_find()
     local cmd="$expr1 ${fileparam} $expr2"
     #echo "running command '$cmd'"
 
+    # turn off filename expansion so that find is passed the asterick
+    set -f
     local filename=$($cmd)
 
     if [ -z $filename ]; then
@@ -145,6 +145,7 @@ function gruf_editor_find()
 	    filename=$($cmd)
 	fi
     fi
+    set +f
 
     if [ -z $filename ]; then
 	echo "filename not found"
