@@ -29,7 +29,7 @@ Load gruf.bashrc and set your $GRUF_PROJPATH:
 	
 	pvi bashrc
 
-Create a filelist by typing, a .filelist file with the full pathname of each file in your project.  This will be used
+Create a .filelist file with the full pathname of each file in your project.  This will be used
 by vim.
 
 	make-list
