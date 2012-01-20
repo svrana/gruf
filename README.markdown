@@ -29,8 +29,22 @@ Load gruf.bashrc and set your $GRUF_PROJPATH:
 	
 	pvi bashrc
 
+Create a filelist by typing:
 
-Follow the instructions below for vim integration.
+	make-list
+
+This will create a .filelist file with the full pathname of each file in your project.
+
+
+Load vi and source ~/gruf/gruf.vimrc.  In command mode:
+
+	\gf
+
+When prompted for a file
+
+	bashrc
+
+hit enter.
 
 
 Installation
