@@ -12,14 +12,14 @@ Suppose you're working on some code in directory
 /work/company/project/moriarity/rls5/bug100.
 
 <i>Change project to 'bug100'</i>
-chp bug100
+	chp bug100
 
 <i>open file ReservationsTab.java that is somewhere in the bug100
 directory</i>
-pvi ReservationsTab.java 
+	pvi ReservationsTab.java 
 
 <i>goto /work/company/project/moriarity/rls5/bug100.</i>
-cdp
+	cdp
 
 Integration shortcuts for vim included.
 
