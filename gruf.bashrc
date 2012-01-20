@@ -1,7 +1,9 @@
 #!/usr/bin/bash
 
 #
-# source gruf.bashrc
+# Source this file from your .bashrc
+#
+# source ~/gruf/gruf.bashrc
 #
 
 # where these files are stored
@@ -97,6 +99,7 @@ function gruf_editor_filelist_find()
 # @param fileparam 	filename or beginning of filename for which to s
 # @param dir 		directory in which search begins
 #
+# If this is to slow for you, use a filelist.
 #
 function gruf_editor_find()
 {

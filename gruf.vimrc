@@ -1,11 +1,11 @@
 "
 " vim configuration.
 "
-" Source this from your .vimrc and include the $PROJECT directory
-" in your tags directory list.
+" After following the instructions in gruf.bashrc, surce this file from your
+" .vimrc and include the $GRUF_PROJECT directory in your tags directory list.
 "
-" source $GRUF_CONFIG/gruf.vimrc' to your .vimrc
-" set tags=tags,$PROJECT/tags
+" source $GRUF_CONFIG/gruf.vimrc
+" set tags=tags,$GRUF_PROJECT/tags
 "
 
 function! GotoProject()
