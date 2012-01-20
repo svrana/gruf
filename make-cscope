@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# Create cscope database based on .gruf.filelist
+#
+cscope -b -i.gruf.filelist > /dev/null 2>&1
