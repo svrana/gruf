@@ -39,7 +39,7 @@ function! GetFileFromFileList(startdir, filelist)
     else
         let myfile=input("Filename? ")
         if strlen(myfile) != 0
-            let cmd = 'grep -E "\<"' . myfile . ' ' . a:startdir . '/' . a:filel
+            let cmd = 'grep -E "\<"' . myfile . ' ' . a:startdir . '/' . a:filelist . ' | head -n1'
             let path = system(cmd)
             if strlen(path) == 0
                 " first instance gives line number of this message for some
@@ -63,19 +63,20 @@ map!    \gl <ESC>:call GetFile(expand("$GRUF_PROJECT"))<CR>
 " This function works decently well if your project isn't big or with an SSD.
 "
 function! GetFile(startdir)
-        let myfile=input("Filename? ")
-        if strlen(myfile) != 0
-                let cmd = 'find '  . a:startdir .  ' -mount -type f -name ' . my
-                let path = system(cmd)
-                if strlen(path) == 0
-           		" first instance gives line number of this message for s
-            		" annoying reason
-                        echoerr 'File not found'
-                else
-                        exec 'edit' path
-                endif
-        else
-                " clear menubar of Filename? prompt, if only enter was pressed
-                redraw!
-        endif
+    let myfile=input("Filename? ")
+    if strlen(myfile) != 0
+	"myfile . ' -not -wholename "./windows/*" -print0 -quit'
+	let cmd = 'find ' . a:startdir .  ' -mount -type f -name ' . myfile . ' -print0 -quit'
+	let path = system(cmd)
+	if strlen(path) == 0
+	    " first instance gives line number of this message for
+	    " some annoying reason
+	    echoerr 'File not found'
+	else
+	    exec 'edit' path
+	endif
+    else
+	" clear menubar of Filename? prompt, if only enter was pressed
+	redraw!
+    endif
 endfun
