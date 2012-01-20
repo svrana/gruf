@@ -11,14 +11,16 @@ Example Usage:
 Suppose you're working on some code in directory
 /work/company/project/moriarity/rls5/bug100.
 
-<i>Change project to 'bug100'</i>
+####Change project to 'bug100'
+
 	chp bug100
 
-<i>open file ReservationsTab.java that is somewhere in the bug100
-directory</i>
+####Open file ReservationsTab.java that is somewhere in the bug100 directory
+
 	pvi ReservationsTab.java 
 
-<i>goto /work/company/project/moriarity/rls5/bug100.</i>
+####goto /work/company/project/moriarity/rls5/bug100.
+
 	cdp
 
 Integration shortcuts for vim included.
