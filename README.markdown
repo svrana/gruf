@@ -11,15 +11,15 @@ Example Usage:
 Suppose you're working on some code in directory
 /work/company/project/moriarity/rls5/bug100.
 
-#### Change project to 'bug100'
+Change project to 'bug100'
 
 	chp bug100
 
-#### Open file ReservationsTab.java that is somewhere in the bug100 directory
+Open file ReservationsTab.java that is somewhere in the bug100 directory
 
 	pvi ReservationsTab.java 
 
-#### Change directory to /work/company/project/moriarity/rls5/bug100.
+Change directory to /work/company/project/moriarity/rls5/bug100.
 
 	cdp
 
