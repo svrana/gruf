@@ -6,7 +6,7 @@ command line and without an IDE.
 
 1. Source gruf.bashrc from your .bashrc
 2. Source gruf.vimrc from your .vimrc
-3. Add $GRUF_PROJECT 
+3. Add $GRUF_PROJECT to your $PATH
 4. Modify gruf.bashrc to your liking (optional)
 
 [Shaw Vrana](http://vranix.com/).
