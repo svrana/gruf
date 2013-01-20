@@ -24,8 +24,8 @@ map!    \gp <ESC>:call GotoProject()<CR>
 " that will use the project file to lookup the file's location in the 
 " directory tree and load the file in the editor.
 "
-map     \gf :call GetFileFromFileList(getcwd(), '.filelist')<CR>
-map!    \gf <ESC>:call GetFileFromFileList(getcwd(), '.filelist')<CR>
+map     \gf :call GetFileFromFileList(getcwd(), '.gruf.filelist')<CR>
+map!    \gf <ESC>:call GetFileFromFileList(getcwd(), '.gruf.filelist')<CR>
 
 "
 " Prompt for a filename, attempt to find its full path by searching a

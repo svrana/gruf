@@ -29,7 +29,7 @@ chp
 
 alias cdp='cd $GRUF_PROJECT'
 alias tlc='($GRUF_CONFIG/make-list && $GRUF_CONFIG/make-tags && $GRUF_CONFIG/make-cscope) &'
-alias pclean='rm -f $GRUF_PROJECT/.gruf.filelist $GRUF_PROJECT/tags $GRUF_PROJECT/cscope.out'
+alias pclean='rm -f $GRUF_PROJECT/.gruf.filelist $GRUF_PROJECT/tags $GRUF_PROJECT/cscope.out $GRUF_PROJECT/ncscope.out'
 
 function pvi()
 {
