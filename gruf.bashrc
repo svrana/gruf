@@ -11,7 +11,7 @@ export GRUF_CONFIG=${HOME}/gruf
 
 # PROJPATH operates like the CDPATH environment variable- a list of colon
 # seperated pathnames that will be searched for the specified project.
-export GRUF_PROJPATH=${HOME}/Projects
+export GRUF_PROJPATH=${HOME}/Projects:${HOME}/workspace
 
 # temporary directory for project persistance
 export GRUF_TMP=${GRUF_CONFIG}/tmp
@@ -28,7 +28,8 @@ source $GRUF_CONFIG/grufproj.env
 chp
 
 alias cdp='cd $GRUF_PROJECT'
-alias tlc='(make-list && make-tags && make-cscope) &'
+alias tlc='($GRUF_CONFIG/make-list && $GRUF_CONFIG/make-tags && $GRUF_CONFIG/make-cscope) &'
+alias pclean='rm -f $GRUF_PROJECT/.gruf.filelist $GRUF_PROJECT/tags $GRUF_PROJECT/cscope.out $GRUF_PROJECT/ncscope.out'
 
 function pvi()
 {
