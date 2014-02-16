@@ -6,8 +6,8 @@
 # source ~/gruf/gruf.bashrc
 #
 
-# where these files are stored
-export GRUF_CONFIG=${HOME}/gruf
+# Set GRUF_CONFIG to the location of this file
+export GRUF_CONFIG="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # PROJPATH operates like the CDPATH environment variable- a list of colon
 # seperated pathnames that will be searched for the specified project.
