@@ -8,17 +8,13 @@
 
 # Set GRUF_CONFIG to the location of this file
 export GRUF_CONFIG="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-# PROJPATH operates like the CDPATH environment variable- a list of colon
+# GRUF_PROJECT_PATH operates like the CDPATH environment variable- a list of colon
 # seperated pathnames that will be searched for the specified project.
-export GRUF_PROJPATH=${HOME}/Projects:${HOME}/workspace
-
+export GRUF_PROJECT_PATH=$HOME/Projects:$HOME/workspace
 # temporary directory for project persistance
-export GRUF_TMP=${GRUF_CONFIG}/tmp
-
-if [ ! -d ${GRUF_TMP} ]; then
-    mkdir ${GRUF_TMP}
-fi
+export GRUF_TMP=$GRUF_CONFIG/tmp
+# tempory file used for project persistence
+export GRUF_PROJECT_FILE=$GRUF_TMP/project.gruf
 
 source $GRUF_CONFIG/grufproj.env
 
@@ -28,16 +24,14 @@ source $GRUF_CONFIG/grufproj.env
 chp
 
 alias cdp='cd $GRUF_PROJECT'
-alias tlc='($GRUF_CONFIG/make-list && $GRUF_CONFIG/make-tags && $GRUF_CONFIG/make-cscope) &'
+alias tlc='(make_list && make_tags && make_cscope) &'
 alias pclean='rm -f $GRUF_PROJECT/.gruf.filelist $GRUF_PROJECT/tags $GRUF_PROJECT/cscope.out $GRUF_PROJECT/ncscope.out'
 
-function pvi()
-{
+function pvi() {
     gruf_editor_find $EDITOR $1 $GRUF_PROJECT
 }
 
-function plvi()
-{
+function plvi() {
     gruf_editor_filelist_find $EDITOR $1 $GRUF_PROJECT .filelist
 }
 
@@ -52,8 +46,7 @@ function plvi()
 #                    filelist
 # @param filelist    name of filelist
 #
-function gruf_editor_filelist_find()
-{
+function gruf_editor_filelist_find() {
     local editor=$1;
     local fileparam=$2;
     local dir=$3;
@@ -102,8 +95,7 @@ function gruf_editor_filelist_find()
 #
 # If this is to slow for you, use a filelist.
 #
-function gruf_editor_find()
-{
+function gruf_editor_find() {
     local editor=$1;
     local fileparam=$2;
     local dir=$3;
@@ -161,3 +153,27 @@ function gruf_editor_find()
     return 0
 }
 
+#
+# Create cscope database based on .gruf.filelist
+#
+function make_cscope() {
+    cscope -b -i.gruf.filelist > /dev/null 2>&1
+}
+
+#
+# Find all files in the directory, if it doesn't match one of the patterns and
+# it's a text file, add its name to the .gruf.filelist file.
+#
+# ignore uninteresting directories
+function make_list() {
+    find -type f | perl -wln -e '(m:/.git/:
+        or /.d$/
+        or /svn/
+        or /cvsignore/
+        or /flags/
+    ) or (-T and print);' > .gruf.filelist
+}
+
+function make_tags() {
+    ctags -L .gruf.filelist
+}
