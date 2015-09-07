@@ -115,7 +115,7 @@ function gruf_editor_find() {
     cd $dir
     local name_param="-name"
 
-    # check if fileparam has slashes in it.  If it does, then change 
+    # check if fileparam has slashes in it.  If it does, then change
     # the name parameter to find accordingly.
     if [[ ${fileparam/\//} != "${fileparam}" ]]; then
 	name_param="-samefile"
@@ -171,6 +171,7 @@ function make_list() {
         or /svn/
         or /cvsignore/
         or /flags/
+        or /.tox/
     ) or (-T and print);' > .gruf.filelist
 }
 
