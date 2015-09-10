@@ -24,7 +24,6 @@ source $GRUF_CONFIG/grufproj.env
 chp
 
 alias cdp='cd $GRUF_PROJECT'
-alias tlc='(make_list && make_tags && make_cscope) &'
 alias pclean='rm -f $GRUF_PROJECT/.gruf.filelist $GRUF_PROJECT/tags $GRUF_PROJECT/cscope.out $GRUF_PROJECT/ncscope.out'
 
 function pvi() {
@@ -178,3 +177,4 @@ function make_list() {
 function make_tags() {
     ctags -L .gruf.filelist
 }
+alias tlc='(make_list && make_tags && make_cscope) &'
