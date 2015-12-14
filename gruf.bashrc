@@ -171,10 +171,10 @@ function make_list() {
         or /cvsignore/
         or /flags/
         or /.tox/
-    ) or (-T and print);' > .gruf.filelist
+    ) or (-T and print);' > .gruf.filelist 2>/dev/null
 }
 
 function make_tags() {
-    ctags -L .gruf.filelist
+    ctags -L .gruf.filelist > /dev/null 2>&1
 }
 alias tlc='(make_list && make_tags && make_cscope) &'
