@@ -1,13 +1,15 @@
-#!/usr/bin/bash
-
 #
-# Source this file from your .bashrc
+# Source this file from your .bashrc or .zshrc
 #
 # source ~/gruf/gruf.bashrc
 #
 
 # Set GRUF_CONFIG to the location of this file
-export GRUF_CONFIG="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+if [ -z $BASH_SOURCE ]; then
+    export GRUF_CONFIG=${0:a:h}
+else
+    export GRUF_CONFIG="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+fi
 # GRUF_PROJECT_PATH operates like the CDPATH environment variable- a list of colon
 # seperated pathnames that will be searched for the specified project.
 export GRUF_PROJECT_PATH=$HOME/Projects:$HOME/workspace
@@ -171,10 +173,11 @@ function make_list() {
         or /cvsignore/
         or /flags/
         or /.tox/
+        or /.csv$/
     ) or (-T and print);' > .gruf.filelist 2>/dev/null
 }
 
 function make_tags() {
-    ctags -L .gruf.filelist > /dev/null 2>&1
+    ctags -L .gruf.filelist --exclude=node_modules/* > /dev/null 2>&1
 }
 alias tlc='(make_list && make_tags && make_cscope) &'
