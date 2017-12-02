@@ -1,15 +1,13 @@
-#
+#!/bin/bash
+
 # Source this file from your .bashrc or .zshrc
 #
 # source ~/gruf/gruf.bashrc
 #
 
 # Set GRUF_CONFIG to the location of this file
-if [ -z $BASH_SOURCE ]; then
-    export GRUF_CONFIG=${0:a:h}
-else
-    export GRUF_CONFIG="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-fi
+export GRUF_CONFIG="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # GRUF_PROJECT_PATH operates like the CDPATH environment variable- a list of colon
 # seperated pathnames that will be searched for the specified project.
 export GRUF_PROJECT_PATH=$HOME/Projects:$HOME/workspace
@@ -25,7 +23,6 @@ source $GRUF_CONFIG/grufproj.env
 #
 chp
 
-alias cdp='cd $GRUF_PROJECT'
 alias pclean='rm -f $GRUF_PROJECT/.gruf.filelist $GRUF_PROJECT/tags $GRUF_PROJECT/cscope.out $GRUF_PROJECT/ncscope.out'
 
 function pvi() {
