@@ -164,17 +164,11 @@ function make_cscope() {
 #
 # ignore uninteresting directories
 function make_list() {
-    find -type f | perl -wln -e '(m:/.git/:
-        or /.d$/
-        or /svn/
-        or /cvsignore/
-        or /flags/
-        or /.tox/
-        or /.csv$/
-    ) or (-T and print);' > .gruf.filelist 2>/dev/null
+    local cmd="fd -t f $GRUF_FD_OPTIONS"
+    $cmd > .gruf.filelist
 }
 
 function make_tags() {
-    ctags -L .gruf.filelist --exclude=node_modules/* > /dev/null 2>&1
+    ctags -L .gruf.filelist > /dev/null 2>&1
 }
 alias tlc='(make_list && make_tags && make_cscope) &'
